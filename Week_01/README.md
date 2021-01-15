@@ -1,1 +1,1 @@
-学习笔记
+详见/src/main/java/noob/作业readme.md

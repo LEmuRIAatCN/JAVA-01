@@ -1,0 +1,277 @@
+Classfile /E:/idea_projects/JAVA-01/Week_01/src/main/java/noob/Main.class
+  Last modified 2021-1-13; size 1291 bytes
+  MD5 checksum d8a36da5291d506c478cc930ee45e130
+  Compiled from "Main.java"
+public class noob.Main
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #9.#41         // java/lang/Object."<init>":()V 对象的无参数实例初始化方法
+   #2 = Fieldref           #6.#42         // noob/Main.normalInt:I
+   #3 = Fieldref           #43.#44        // java/lang/System.out:Ljava/io/PrintStream;
+   #4 = Fieldref           #6.#45         // noob/Main.staticInt:I
+   #5 = Methodref          #46.#47        // java/io/PrintStream.println:(I)V
+   #6 = Class              #48            // noob/Main
+   #7 = Methodref          #6.#41         // noob/Main."<init>":()V
+   #8 = Methodref          #6.#49         // noob/Main.doSth:(I)V
+   #9 = Class              #50            // java/lang/Object
+  #10 = Utf8   字符常量            finalInt
+  #11 = Utf8               I
+  #12 = Utf8               ConstantValue
+  #13 = Integer            321
+  #14 = Utf8               staticInt
+  #15 = Utf8               normalInt
+  #16 = Utf8               <init>
+  #17 = Utf8               ()V
+  #18 = Utf8               Code
+  #19 = Utf8               LineNumberTable
+  #20 = Utf8               LocalVariableTable
+  #21 = Utf8               this
+  #22 = Utf8               Lnoob/Main;
+  #23 = Utf8               (Ljava/lang/String;)V
+  #24 = Utf8               s
+  #25 = Utf8               Ljava/lang/String;
+  #26 = Utf8               (I)V
+  #27 = Utf8               c
+  #28 = Utf8               main
+  #29 = Utf8               ([Ljava/lang/String;)V
+  #30 = Utf8               i
+  #31 = Utf8               [Ljava/lang/String;
+  #32 = Utf8               uu
+  #33 = Utf8               StackMapTable
+  #34 = Class              #48            // noob/Main
+  #35 = Utf8               doSth
+  #36 = Utf8               x
+  #37 = Utf8               y
+  #38 = Utf8               <clinit>
+  #39 = Utf8               SourceFile
+  #40 = Utf8               Main.java
+  #41 = NameAndType  字段或方法      #16:#17        // "<init>":()V
+  #42 = NameAndType        #15:#11        // normalInt:I
+  #43 = Class              #51            // java/lang/System
+  #44 = NameAndType        #52:#53        // out:Ljava/io/PrintStream;
+  #45 = NameAndType        #14:#11        // staticInt:I
+  #46 = Class              #54            // java/io/PrintStream
+  #47 = NameAndType        #55:#26        // println:(I)V
+  #48 = Utf8               noob/Main
+  #49 = NameAndType        #35:#26        // doSth:(I)V
+  #50 = Utf8               java/lang/Object
+  #51 = Utf8               java/lang/System
+  #52 = Utf8               out
+  #53 = Utf8               Ljava/io/PrintStream;
+  #54 = Utf8               java/io/PrintStream
+  #55 = Utf8               println
+{
+  public noob.Main();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1 //此方法的栈帧：操作数栈深度最大值为2，本地变量1个，参数个数1
+         0: aload_0 //压入本对象，this，原文即“On instance method invocation,
+                                              //local variable 0 is always used to pass a reference to the object on which
+                                              //the instance method is being invoked (this in the Java programming language)”
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V 调用构造函数
+                                              // invokespecial在调用相应的方法的时候，需要把this作为入参
+         4: aload_0                           //应该是上面构造函数的调用，用掉了在0处压入的this，所以重新压入this
+         5: bipush        123                 //压常量123
+         7: putfield      #2                  // Field normalInt:I 这里初始化了费静态的int成员变量为123
+        10: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        13: getstatic     #4                  // Field staticInt:I  静态成员变量存在常量表池里头，直接拿来用
+        16: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V
+        19: return
+      LineNumberTable:
+        line 8: 0
+        line 6: 4
+        line 9: 10
+        line 10: 19
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0  this   Lnoob/Main;
+
+  public noob.Main(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: bipush        123
+         7: putfield      #2                  // Field normalInt:I
+        10: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        13: getstatic     #4                  // Field staticInt:I
+        16: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V
+        19: return
+      LineNumberTable:
+        line 12: 0
+        line 6: 4
+        line 13: 10
+        line 14: 19
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0  this   Lnoob/Main;
+            0      20     1     s   Ljava/lang/String;   从头至尾这个变量都是有效的
+
+  public noob.Main(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: bipush        123
+         7: putfield      #2                  // Field normalInt:I
+        10: aload_0
+        11: iload_1                           //装载序号为1的本地变量，即 Load a local variable onto the operand stack
+        12: putfield      #2                  // Field normalInt:I
+        15: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        18: getstatic     #4                  // Field staticInt:I
+        21: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V
+        24: return
+      LineNumberTable:
+        line 16: 0
+        line 6: 4
+        line 17: 10
+        line 18: 15
+        line 19: 24
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      25     0  this   Lnoob/Main;
+            0      25     1     c   I
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=4, args_size=1
+         0: iconst_1
+         1: istore_1        //把上一行读取的int常量1设置到在方法内部定义的int变量“uu”，即int uu=1
+         2: iload_1         //再读取uu。   Load a local variable onto the operand stack
+         3: sipush        1000   //Load a constant on to the operand stack
+         6: iadd            //把处于栈顶的两个uu和1000加起来，再放回栈顶
+         7: istore_1        //这就是把栈顶，上一步加法的结果，再存储到本地变量表中slot=1的变量，即uu中
+         8: iload_1
+         9: iconst_3
+        10: imul
+        11: istore_1
+        12: iload_1
+        13: bipush        33
+        15: irem
+        16: istore_1
+        17: iload_1
+        18: bipush        123
+        20: isub
+        21: istore_1
+        22: new           #6                  // class noob/Main
+        25: dup                              //复制了栈顶的元素，这是复制的reference
+        26: invokespecial #7                  // Method "<init>":()V 无参构造了一波
+        29: astore_2
+        30: aload_2
+        31: aload_2                           //先要取对象的normalInt字段，运算后，再设置回Main对象，所以aload_2两次
+        32: getfield      #2                  // Field normalInt:I
+        35: iload_1
+        36: iadd
+        37: putfield      #2                  // Field normalInt:I   按道理这里呼应的是 “30: aload_2”
+        40: aload_2
+        41: bipush        123
+        43: invokevirtual #8                  // Method doSth:(I)V
+        46: iconst_0
+        47: istore_3
+        48: iload_3                           //for循环中的index变量int i
+        49: bipush        10
+        51: if_icmpge     82                    //for循环比较index和10的大小，当执行结果正确的时候跳转到“82: return”，结束方法
+        54: iload_3
+        55: iconst_2
+        56: irem                                // 求余
+        57: ifne          65                    //求余结果不等于0，是跳转到“65: iload_3”，即不进入这个if代码
+        60: aload_2
+        61: iconst_2
+        62: invokevirtual #8                  // Method doSth:(I)V
+        65: iload_3
+        66: iconst_3
+        67: irem
+        68: ifne          76
+        71: aload_2
+        72: iconst_3
+        73: invokevirtual #8                  // Method doSth:(I)V
+        76: iinc          3, 1
+        79: goto          48                   //跳上去，继续for循环
+        82: return
+      LineNumberTable:
+        line 22: 0
+        line 23: 2
+        line 24: 8
+        line 25: 12
+        line 26: 17
+        line 27: 22
+        line 28: 30
+        line 29: 40
+        line 30: 46
+        line 31: 54
+        line 32: 60
+        line 34: 65
+        line 35: 71
+        line 30: 76
+        line 38: 82
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           48      34     3     i   I
+            0      83     0     s   [Ljava/lang/String;
+            2      81     1    uu   I    方法内部定义的这个uu变量，生命周期就是在创建之后到整个main方法结束
+           30      53     2  main   Lnoob/Main;
+      StackMapTable: number_of_entries = 4
+        frame_type = 254 /* append */
+          offset_delta = 48
+          locals = [ int, class noob/Main, int ]
+        frame_type = 16 /* same */
+        frame_type = 10 /* same */
+        frame_type = 250 /* chop */
+          offset_delta = 5
+
+  public void doSth(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=2
+         0: aload_0
+         1: iload_1
+         2: bipush        123
+         4: iadd
+         5: putfield      #2                  // Field normalInt:I
+         8: aload_0
+         9: getfield      #2                  // Field normalInt:I
+        12: putstatic     #4                  // Field staticInt:I
+        15: bipush        123
+        17: istore_2
+        18: iload_2
+        19: aload_0
+        20: getfield      #2                  // Field normalInt:I
+        23: iadd
+        24: istore_2
+        25: return
+      LineNumberTable:
+        line 41: 0
+        line 42: 8
+        line 43: 15
+        line 44: 18
+        line 45: 25
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      26     0  this   Lnoob/Main;
+            0      26     1     x   I
+           18       8     2     y   I
+
+  static {};                                    //对静态成员变量的赋值
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: sipush        1234
+         3: putstatic     #4                  // Field staticInt:I
+         6: return
+      LineNumberTable:
+        line 5: 0
+}
+SourceFile: "Main.java"

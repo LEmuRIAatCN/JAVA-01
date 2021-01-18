@@ -21,5 +21,5 @@
 ##### 代的设计  
 <center>  
 
-![Yg](\.\pics\1YoungG.png)
+![Yg](pics/1YoungG.png)
 </center>

@@ -4,7 +4,7 @@
       - [lesson_3_2](#lesson_3_2)
       - [lesson_4_1](#lesson_4_1)
       - [lesson_4_2](#lesson_4_2)
-    + [hotspot vm gc整理](#hotspot_vm_gc整理)
+    + [hotspot_vm_gc整理](#hotspot_vm_gc整理)
       - [回收设计的选择](#回收设计的选择)
       - [各类垃圾回收器](#各类垃圾回收器)
         * [代的设计](#代的设计)

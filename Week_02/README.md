@@ -1,3 +1,5 @@
+[toc]  
+
 # 学习笔记  
 ### homework  
 #### lession_3_1  
@@ -50,6 +52,9 @@
 * G1
 -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:g1.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：12737  
+####lesson_3_1  
+####lesson_4_1  
+####lesson_4_2
 ### hotspot vm gc整理  
 #### 回收设计的选择  
 > 串行、并行  
@@ -91,17 +96,21 @@
   * 年轻代：和并行gc一致  
   * 老年代：强调gc和业务应用同时进行，但是也会有短暂的stw的阶段。**回收是原地释放的，即non-compacting。造成可用老年代空间的不连续，碎片化。更偏好大的堆空间**  
 * G1:适用于服务端，偏向于多核、大内存的机器，旨在实现短暂停，同时高吞吐的目标。gc过程与业务应用同时进行。堆被划分为等大小的区域  
+  * 在G1中的老年代年轻代还是存在的，但是已经是逻辑上的概念了。即代的各区之间的内存不连续了。  
+  * 
+    * 
+
 G1垃圾回收器相关的虚拟机参数：  
 
-|参数名|作用|  
-|...|...|  
+|参数名|作用|   
+| :-----| :--- |  
 |-XX:+UseG1GC|启动开关|  
 |-XX:MaxGCPauseMillis=n|期望的最大gc时间|  
 |-XX:InitiatingHeapOccupancyPercent=n|开始gc时全部堆空间的占用比|  
 |-XX:NewRatio=n|尽管堆是均分的，还是存在年轻代的比例|  
 |-XX:SurvivorRatio=n|eden和from、to的比例|  
 |-XX:MaxTenuringThreshold=n|经过多少次ygc，对象晋升老年代|  
-|-XX:ParallelGCThreads=n|并行阶段gc的线程数量|  
-|-XX:ConcGCThreads=n|并发回收的垃圾回收线程数|  
+|-XX:ParallelGCThreads=n|并行阶段gc的线程数量TODO|  
+|-XX:ConcGCThreads=n|并发回收的垃圾回收线程数TODO|  
 |-XX:G1ReservePercent=n|堆的保留空间，用于减少晋升失败的可能性，即留一块缓冲区域用于缓解堆空间紧张时发生晋升失败的问题|  
 |-XX:G1HeapRegionSize=n|堆每个分区的大小|  

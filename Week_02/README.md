@@ -1,8 +1,18 @@
-[toc]  
+- [学习笔记](#----)
+    + [homework](#homework)
+      - [lesson_3_1](#lesson-3-1)
+      - [lesson_3_2](#lesson-3-2)
+      - [lesson_4_1](#lesson-4-1)
+      - [lesson_4_2](#lesson-4-2)
+    + [hotspot vm gc整理](#hotspot-vm-gc--)
+      - [回收设计的选择](#-------)
+      - [各类垃圾回收器](#-------)
+        * [代的设计](#----)
+        * [具体的回收器](#------)
 
 # 学习笔记  
 ### homework  
-#### lession_3_1  
+#### lesson_3_1  
 * 串行gc  
 -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:serial.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：14473
@@ -52,9 +62,12 @@
 * G1
 -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:g1.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：12737  
-####lesson_3_1  
-####lesson_4_1  
-####lesson_4_2
+#### lesson_3_2 
+1111
+#### lesson_4_1  
+213
+#### lesson_4_2  
+123
 ### hotspot vm gc整理  
 #### 回收设计的选择  
 > 串行、并行  

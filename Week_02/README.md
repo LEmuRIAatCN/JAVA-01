@@ -58,14 +58,44 @@
   [GC (Allocation Failure) 2021-01-20T20:40:57.869+0800: 0.430: [ParNew: 157247K->17469K(157248K), 0.0217683 secs] 413388K->319006K(506816K), 0.0218078 secs] [Times: user=0.28 sys=0.06, real=0.02 secs]  
   [GC (Allocation Failure) 2021-01-20T20:40:57.904+0800: 0.465: [ParNew: 157245K->157245K(157248K), 0.0000387 secs]2021-01-20T20:40:57.904+0800: 0.465: [CMS2021-01-20T20:40:57.904+0800: 0.465: [CMS-concurrent-abortable-preclean: 0.002/0.079 secs] [Times: user=0.55 sys=0.06, real=0.08 secs] 
    (concurrent mode failure): 301537K->250851K(349568K), 0.0321722 secs] 458782K->250851K(506816K), [Metaspace: 3293K->3293K(1056768K)], 0.0325231 secs] [Times: user=0.03 sys=0.00, real=0.03 secs]  
-> 持续几个young gc后，开始old的回收，并且提示了回收的时候回收行为和应用本身并发执行失败了。。
+> 持续几个young gc后，开始old的回收，并且提示了回收的时候回收行为和应用本身并发执行失败了。。  
+
+-XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+输出：19603  
+> 看到日志基本只有young gc，即老年代充足够用，撑得过应用的生命周期  
+> 同时4g情况下cms对比并行gc，可以看到吞吐量上，并行gc还是占优势
+
 * G1
 -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:g1.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：12737  
+-XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+输出：24130  
+-XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+输出：26658  
+> g1更偏好大容量的堆。在堆较大的情况下，对比cms是一种全面的提升；堆空间不足，使用g1，很可能是反向的优化
 #### lesson_3_2 
 1111
 #### lesson_4_1  
-213
+sb -c 32 -N 120 -u "http://localhost:8088/api/hello"  
+
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:gs-serial512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar   
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms4g -Xmx4g -Xloggc:gs-serial4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms8g -Xmx8g -Xloggc:gs-serial8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+  
+  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:gs-parallel512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms4g -Xmx4g -Xloggc:gs-parallel4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms8g -Xmx8g -Xloggc:gs-parallel8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar    
+
+
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:gs-cms512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gs-cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms8g -Xmx8g -Xloggc:gs-cms8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+
+
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:gs-g1512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:gs-g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+* java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:gs-g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 #### lesson_4_2  
 123
 ### hotspot_vm_gc整理  

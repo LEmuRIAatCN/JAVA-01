@@ -58,7 +58,7 @@
   [GC (Allocation Failure) 2021-01-20T20:40:57.869+0800: 0.430: [ParNew: 157247K->17469K(157248K), 0.0217683 secs] 413388K->319006K(506816K), 0.0218078 secs] [Times: user=0.28 sys=0.06, real=0.02 secs]  
   [GC (Allocation Failure) 2021-01-20T20:40:57.904+0800: 0.465: [ParNew: 157245K->157245K(157248K), 0.0000387 secs]2021-01-20T20:40:57.904+0800: 0.465: [CMS2021-01-20T20:40:57.904+0800: 0.465: [CMS-concurrent-abortable-preclean: 0.002/0.079 secs] [Times: user=0.55 sys=0.06, real=0.08 secs] 
    (concurrent mode failure): 301537K->250851K(349568K), 0.0321722 secs] 458782K->250851K(506816K), [Metaspace: 3293K->3293K(1056768K)], 0.0325231 secs] [Times: user=0.03 sys=0.00, real=0.03 secs]  
-> 持续几个young gc后，开始old的回收，并且提示了回收的时候回收行为和应用本身并发执行失败了。。  
+> 持续几个young gc后，开始old的回收  
 
 -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：19603  

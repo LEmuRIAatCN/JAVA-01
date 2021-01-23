@@ -92,8 +92,9 @@ sb -c 32 -N 120 -u "http://localhost:8088/api/hello"
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:gs-g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 #### lesson_4_1  
 nio模式的http服务端，性能更优，相同压测条件下，gc耗时更短、速度更快  
-#### lesson_4_2    
-[NoobHttpClient][src/NoobHttpClient]
+#### lesson_4_2   
+ 
+[NoobHttpClient][src/NoobHttpClient.java]
 ### hotspot-vm-gc整理  
 #### 回收设计的选择  
 > 串行、并行  

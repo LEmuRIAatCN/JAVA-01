@@ -4,7 +4,7 @@
       - [lesson_3_2](#lesson_3_2)
       - [lesson_4_1](#lesson_4_1)
       - [lesson_4_2](#lesson_4_2)
-    + [hotspot_vm_gc整理](#hotspot_vm_gc整理)
+    + [hotspot-vm-gc整理](#hotspot-vm-gc整理)
       - [回收设计的选择](#回收设计的选择)
       - [各类垃圾回收器](#各类垃圾回收器)
         * [代的设计](#代的设计)
@@ -65,40 +65,36 @@
 > 看到日志基本只有young gc，即老年代充足够用，撑得过应用的生命周期  
 > 同时4g情况下cms对比并行gc，可以看到吞吐量上，并行gc还是占优势
 
-* G1
+* G1  
 -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:g1.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：12737  
 -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：24130  
 -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
 输出：26658  
-> g1更偏好大容量的堆。在堆较大的情况下，对比cms是一种全面的提升；堆空间不足，使用g1，很可能是反向的优化
-#### lesson_3_2 
-1111
-#### lesson_4_1  
+> g1更偏好大容量的堆。在堆较大的情况下，对比cms是一种全面的提升；堆空间不足，使用g1，很可能是反向的优化  
+
+#### lesson_3_2  
 sb -c 32 -N 120 -u "http://localhost:8088/api/hello"  
+相同压测条件下，使用不同的gc方式、不同的堆，demo的性能基本类似。猜测当前  
 
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:gs-serial512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar   
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms4g -Xmx4g -Xloggc:gs-serial4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms8g -Xmx8g -Xloggc:gs-serial8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-  
-  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:gs-parallel512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms4g -Xmx4g -Xloggc:gs-parallel4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms8g -Xmx8g -Xloggc:gs-parallel8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar    
-
-
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:gs-cms512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gs-cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms8g -Xmx8g -Xloggc:gs-cms8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-
-
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:gs-g1512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:gs-g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
 * java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:gs-g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-#### lesson_4_2  
-123
-### hotspot_vm_gc整理  
+#### lesson_4_1  
+nio模式的http服务端，性能更优，相同压测条件下，gc耗时更短、速度更快  
+#### lesson_4_2    
+NoobHttpClient[src/NoobHttpClient]
+### hotspot-vm-gc整理  
 #### 回收设计的选择  
 > 串行、并行  
 >> 串行：即垃圾回收任务是由一个cpu核心全部处理  

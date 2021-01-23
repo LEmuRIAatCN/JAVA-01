@@ -1,0 +1,59 @@
+Java HotSpot(TM) 64-Bit Server VM (25.251-b08) for windows-amd64 JRE (1.8.0_251-b08), built on Mar 12 2020 06:31:49 by "" with MS VC++ 10.0 (VS2010)
+Memory: 4k page, physical 33485708k(21300328k free), swap 35582860k(13589712k free)
+CommandLine flags: -XX:InitialHeapSize=8589934592 -XX:MaxHeapSize=8589934592 -XX:MaxNewSize=1134141440 -XX:MaxTenuringThreshold=6 -XX:NewSize=1134141440 -XX:OldPLABSize=16 -XX:OldSize=2268282880 -XX:+PrintGC -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:-UseAdaptiveSizePolicy -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:-UseLargePagesIndividualAllocation -XX:+UseParNewGC 
+2021-01-22T22:03:37.288+0800: 2.204: [GC (CMS Initial Mark) [1 CMS-initial-mark: 0K(7281088K)] 868371K(8277888K), 0.1007584 secs] [Times: user=0.42 sys=0.00, real=0.10 secs] 
+2021-01-22T22:03:37.388+0800: 2.304: [CMS-concurrent-mark-start]
+2021-01-22T22:03:37.389+0800: 2.305: [CMS-concurrent-mark: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+2021-01-22T22:03:37.389+0800: 2.305: [CMS-concurrent-preclean-start]
+2021-01-22T22:03:37.394+0800: 2.311: [CMS-concurrent-preclean: 0.005/0.005 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:03:37.394+0800: 2.311: [CMS-concurrent-abortable-preclean-start]
+2021-01-22T22:03:38.138+0800: 3.054: [GC (Allocation Failure) 2021-01-22T22:03:38.138+0800: 3.054: [ParNew: 886080K->31797K(996800K), 0.0168998 secs] 886080K->31797K(8277888K), 0.0169458 secs] [Times: user=0.00 sys=0.02, real=0.02 secs] 
+ CMS: abort preclean due to time 2021-01-22T22:03:42.415+0800: 7.331: [CMS-concurrent-abortable-preclean: 1.563/5.020 secs] [Times: user=3.14 sys=0.06, real=5.02 secs] 
+2021-01-22T22:03:42.415+0800: 7.331: [GC (CMS Final Remark) [YG occupancy: 67228 K (996800 K)]2021-01-22T22:03:42.415+0800: 7.331: [Rescan (parallel) , 0.0030794 secs]2021-01-22T22:03:42.418+0800: 7.335: [weak refs processing, 0.0000176 secs]2021-01-22T22:03:42.418+0800: 7.335: [class unloading, 0.0035968 secs]2021-01-22T22:03:42.422+0800: 7.338: [scrub symbol table, 0.0028907 secs]2021-01-22T22:03:42.425+0800: 7.341: [scrub string table, 0.0002526 secs][1 CMS-remark: 0K(7281088K)] 67228K(8277888K), 0.0107615 secs] [Times: user=0.02 sys=0.00, real=0.01 secs] 
+2021-01-22T22:03:42.426+0800: 7.342: [CMS-concurrent-sweep-start]
+2021-01-22T22:03:42.426+0800: 7.342: [CMS-concurrent-sweep: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+2021-01-22T22:03:42.426+0800: 7.342: [CMS-concurrent-reset-start]
+2021-01-22T22:03:42.458+0800: 7.374: [CMS-concurrent-reset: 0.032/0.032 secs] [Times: user=0.00 sys=0.03, real=0.03 secs] 
+2021-01-22T22:03:46.132+0800: 11.049: [GC (Allocation Failure) 2021-01-22T22:03:46.133+0800: 11.049: [ParNew: 917877K->27330K(996800K), 0.0098389 secs] 917877K->27330K(8277888K), 0.0099351 secs] [Times: user=0.19 sys=0.02, real=0.01 secs] 
+2021-01-22T22:03:49.354+0800: 14.270: [GC (Allocation Failure) 2021-01-22T22:03:49.354+0800: 14.270: [ParNew: 913410K->30758K(996800K), 0.0085098 secs] 913410K->30758K(8277888K), 0.0085585 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:03:52.537+0800: 17.453: [GC (Allocation Failure) 2021-01-22T22:03:52.537+0800: 17.453: [ParNew: 916838K->32767K(996800K), 0.0083538 secs] 916838K->32767K(8277888K), 0.0084052 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:03:55.849+0800: 20.766: [GC (Allocation Failure) 2021-01-22T22:03:55.849+0800: 20.766: [ParNew: 918847K->30252K(996800K), 0.0081705 secs] 918847K->30252K(8277888K), 0.0082196 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:03:59.183+0800: 24.100: [GC (Allocation Failure) 2021-01-22T22:03:59.183+0800: 24.100: [ParNew: 916332K->30349K(996800K), 0.0085727 secs] 916332K->30349K(8277888K), 0.0086357 secs] [Times: user=0.09 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:02.563+0800: 27.479: [GC (Allocation Failure) 2021-01-22T22:04:02.563+0800: 27.479: [ParNew: 916429K->22789K(996800K), 0.0392645 secs] 916429K->40080K(8277888K), 0.0393185 secs] [Times: user=0.23 sys=0.00, real=0.04 secs] 
+2021-01-22T22:04:06.014+0800: 30.930: [GC (Allocation Failure) 2021-01-22T22:04:06.014+0800: 30.930: [ParNew: 908869K->5672K(996800K), 0.0083605 secs] 926160K->26849K(8277888K), 0.0084279 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:09.404+0800: 34.320: [GC (Allocation Failure) 2021-01-22T22:04:09.404+0800: 34.320: [ParNew: 891752K->1428K(996800K), 0.0070419 secs] 912929K->22609K(8277888K), 0.0070996 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:12.824+0800: 37.740: [GC (Allocation Failure) 2021-01-22T22:04:12.824+0800: 37.740: [ParNew: 887508K->366K(996800K), 0.0075604 secs] 908689K->21548K(8277888K), 0.0076069 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:16.277+0800: 41.194: [GC (Allocation Failure) 2021-01-22T22:04:16.277+0800: 41.194: [ParNew: 886446K->109K(996800K), 0.0070872 secs] 907628K->21290K(8277888K), 0.0071376 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:19.723+0800: 44.640: [GC (Allocation Failure) 2021-01-22T22:04:19.723+0800: 44.640: [ParNew: 886189K->75K(996800K), 0.0065133 secs] 907370K->21256K(8277888K), 0.0065887 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:23.161+0800: 48.077: [GC (Allocation Failure) 2021-01-22T22:04:23.161+0800: 48.077: [ParNew: 886155K->59K(996800K), 0.0070157 secs] 907336K->21240K(8277888K), 0.0070664 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:26.605+0800: 51.521: [GC (Allocation Failure) 2021-01-22T22:04:26.605+0800: 51.521: [ParNew: 886139K->74K(996800K), 0.0081058 secs] 907320K->21255K(8277888K), 0.0081640 secs] [Times: user=0.16 sys=0.03, real=0.01 secs] 
+2021-01-22T22:04:30.031+0800: 54.947: [GC (Allocation Failure) 2021-01-22T22:04:30.031+0800: 54.947: [ParNew: 886154K->101K(996800K), 0.0073667 secs] 907335K->21284K(8277888K), 0.0074168 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:33.443+0800: 58.360: [GC (Allocation Failure) 2021-01-22T22:04:33.443+0800: 58.360: [ParNew: 886181K->95K(996800K), 0.0073119 secs] 907364K->21278K(8277888K), 0.0073794 secs] [Times: user=0.16 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:36.878+0800: 61.794: [GC (Allocation Failure) 2021-01-22T22:04:36.878+0800: 61.794: [ParNew: 886175K->70K(996800K), 0.0075329 secs] 907358K->21257K(8277888K), 0.0075848 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:40.317+0800: 65.233: [GC (Allocation Failure) 2021-01-22T22:04:40.317+0800: 65.233: [ParNew: 886150K->92K(996800K), 0.0072903 secs] 907337K->21278K(8277888K), 0.0073408 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:43.764+0800: 68.680: [GC (Allocation Failure) 2021-01-22T22:04:43.764+0800: 68.680: [ParNew: 886172K->93K(996800K), 0.0070435 secs] 907358K->21279K(8277888K), 0.0071080 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:47.209+0800: 72.125: [GC (Allocation Failure) 2021-01-22T22:04:47.209+0800: 72.125: [ParNew: 886173K->74K(996800K), 0.0080983 secs] 907359K->21260K(8277888K), 0.0081578 secs] [Times: user=0.16 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:50.663+0800: 75.579: [GC (Allocation Failure) 2021-01-22T22:04:50.663+0800: 75.579: [ParNew: 886154K->82K(996800K), 0.0073933 secs] 907340K->21282K(8277888K), 0.0074407 secs] [Times: user=0.19 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:54.134+0800: 79.050: [GC (Allocation Failure) 2021-01-22T22:04:54.134+0800: 79.050: [ParNew: 886162K->76K(996800K), 0.0067954 secs] 907362K->21275K(8277888K), 0.0068469 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:04:57.558+0800: 82.474: [GC (Allocation Failure) 2021-01-22T22:04:57.558+0800: 82.474: [ParNew: 886156K->72K(996800K), 0.0074745 secs] 907355K->21272K(8277888K), 0.0075329 secs] [Times: user=0.19 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:01.043+0800: 85.959: [GC (Allocation Failure) 2021-01-22T22:05:01.043+0800: 85.959: [ParNew: 886152K->68K(996800K), 0.0067432 secs] 907352K->21269K(8277888K), 0.0067950 secs] [Times: user=0.17 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:04.512+0800: 89.428: [GC (Allocation Failure) 2021-01-22T22:05:04.512+0800: 89.428: [ParNew: 886148K->61K(996800K), 0.0070797 secs] 907349K->21261K(8277888K), 0.0071554 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:07.988+0800: 92.905: [GC (Allocation Failure) 2021-01-22T22:05:07.988+0800: 92.905: [ParNew: 886141K->81K(996800K), 0.0073897 secs] 907341K->21282K(8277888K), 0.0074485 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:11.546+0800: 96.462: [GC (Allocation Failure) 2021-01-22T22:05:11.546+0800: 96.462: [ParNew: 886161K->70K(996800K), 0.0072165 secs] 907362K->21272K(8277888K), 0.0072757 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:14.999+0800: 99.916: [GC (Allocation Failure) 2021-01-22T22:05:14.999+0800: 99.916: [ParNew: 886150K->68K(996800K), 0.0068580 secs] 907352K->21270K(8277888K), 0.0069073 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:18.442+0800: 103.359: [GC (Allocation Failure) 2021-01-22T22:05:18.443+0800: 103.359: [ParNew: 886148K->81K(996800K), 0.0068653 secs] 907350K->21283K(8277888K), 0.0069397 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:21.925+0800: 106.841: [GC (Allocation Failure) 2021-01-22T22:05:21.925+0800: 106.841: [ParNew: 886161K->67K(996800K), 0.0062845 secs] 907363K->21269K(8277888K), 0.0064400 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:25.399+0800: 110.316: [GC (Allocation Failure) 2021-01-22T22:05:25.399+0800: 110.316: [ParNew: 886147K->56K(996800K), 0.0073363 secs] 907349K->21258K(8277888K), 0.0073833 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:28.883+0800: 113.800: [GC (Allocation Failure) 2021-01-22T22:05:28.883+0800: 113.800: [ParNew: 886136K->70K(996800K), 0.0070285 secs] 907338K->21272K(8277888K), 0.0070786 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:32.419+0800: 117.335: [GC (Allocation Failure) 2021-01-22T22:05:32.419+0800: 117.335: [ParNew: 886150K->71K(996800K), 0.0075647 secs] 907352K->21273K(8277888K), 0.0076358 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:35.958+0800: 120.875: [GC (Allocation Failure) 2021-01-22T22:05:35.958+0800: 120.875: [ParNew: 886151K->58K(996800K), 0.0071232 secs] 907353K->21260K(8277888K), 0.0071749 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:05:39.417+0800: 124.333: [GC (Allocation Failure) 2021-01-22T22:05:39.417+0800: 124.333: [ParNew: 886138K->64K(996800K), 0.0070152 secs] 907340K->21266K(8277888K), 0.0070649 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+2021-01-22T22:06:28.399+0800: 173.315: [GC (Allocation Failure) 2021-01-22T22:06:28.399+0800: 173.315: [ParNew: 886144K->62K(996800K), 0.0073559 secs] 907346K->21264K(8277888K), 0.0074039 secs] [Times: user=0.20 sys=0.00, real=0.01 secs] 
+Heap
+ par new generation   total 996800K, used 49690K [0x00000005c0000000, 0x0000000603990000, 0x0000000603990000)
+  eden space 886080K,   5% used [0x00000005c0000000, 0x00000005c30770c0, 0x00000005f6150000)
+  from space 110720K,   0% used [0x00000005f6150000, 0x00000005f615f998, 0x00000005fcd70000)
+  to   space 110720K,   0% used [0x00000005fcd70000, 0x00000005fcd70000, 0x0000000603990000)
+ concurrent mark-sweep generation total 7281088K, used 21201K [0x0000000603990000, 0x00000007c0000000, 0x00000007c0000000)
+ Metaspace       used 37350K, capacity 39931K, committed 40196K, reserved 1085440K
+  class space    used 4703K, capacity 5101K, committed 5132K, reserved 1048576K

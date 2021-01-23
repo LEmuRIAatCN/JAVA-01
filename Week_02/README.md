@@ -93,7 +93,7 @@ sb -c 32 -N 120 -u "http://localhost:8088/api/hello"
 #### lesson_4_1  
 nio模式的http服务端，性能更优，相同压测条件下，gc耗时更短、速度更快  
 #### lesson_4_2    
-NoobHttpClient[src/NoobHttpClient]
+[NoobHttpClient][src/NoobHttpClient]
 ### hotspot-vm-gc整理  
 #### 回收设计的选择  
 > 串行、并行  

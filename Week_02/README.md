@@ -10,12 +10,12 @@
         * [代的设计](#代的设计)
         * [具体的回收器](#具体的回收器)
 
-# 学习笔记  
+## 学习笔记  
 ### homework  
 #### lesson_3_1  
-* 串行gc  
--XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:serial.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：14473
+##### 串行gc  
+    -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:serial.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：14473
 > [GC (Allocation Failure) 2021-01-19T23:19:30.537+0800: 0.149: [DefNew: 139648K->17472K(157248K), 0.0160006 secs] 139648K->38817K(506816K), 0.0160984 secs] [Times: user=0.02 sys=0.00, real=0.02 secs]  
 > 默认比例下年轻代的大小157248K，堆的最大值506816K ！=512m？？？，发生了一次young gc  
 > [GC (Allocation Failure) 2021-01-19T23:19:30.775+0800: 0.387: [DefNew: 157246K->157246K(157248K), 0.0000097 secs]2021-01-19T23:19:30.775+0800: 0.387: [Tenured: 315567K->266185K(349568K), 0.0225954 secs] 472814K->266185K(506816K), [Metaspace: 3293K->3293K(1056768K)], 0.0226505 secs] [Times: user=0.03 sys=0.00, real=0.02 secs]  
@@ -24,72 +24,85 @@
 > 后期可以看到在持续的full gc，因为老年代持续爆满  
 
 
-* 并行gc  
--XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:parallel.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：11641  
--XX:+UseParallelOldGC -Xms512m -Xmx512m -Xloggc:parallelOld.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：11415  
--XX:+UseParallelGC -XX:+UseParallelOldGC -Xms512m -Xmx512m -Xloggc:parallelwithpold.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：11797  
--XX:+UseParallelGC -XX:-UseParallelOldGC -Xms512m -Xmx512m -Xloggc:parallelwithoutpo.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps    
-输出：11607  
+##### 并行gc  
+    -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:parallel.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：11641  
+    -XX:+UseParallelOldGC -Xms512m -Xmx512m -Xloggc:parallelOld.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：11415  
+    -XX:+UseParallelGC -XX:+UseParallelOldGC -Xms512m -Xmx512m -Xloggc:parallelwithpold.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：11797  
+    -XX:+UseParallelGC -XX:-UseParallelOldGC -Xms512m -Xmx512m -Xloggc:parallelwithoutpo.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps    
+    输出：11607  
 
 > UseParallelOldGC是UseParallelGC的进化版，也叫“Parallel Compacting Collector”，是在并行gc基础上，对老年代同样也使用了并行地回收算法  
-> 
->  
->
-* 4g堆情况下串行、并行地对比  
--XX:+UseSerialGC -Xms4G -Xmx4G -Xloggc:serial4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：16540  
--XX:+UseParallelGC -Xms4G -Xmx4G -Xloggc:parallel4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：25266  
+
+##### 4g堆情况下串行、并行地对比  
+    -XX:+UseSerialGC -Xms4G -Xmx4G -Xloggc:serial4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：16540  
+    -XX:+UseParallelGC -Xms4G -Xmx4G -Xloggc:parallel4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：25266  
 > 放大的堆的容量，并行回收的效率显现出来了，并行地情况下回收效率高，应用的吞吐大。机器的核心数足够，并行不会导致反向的优化
-* CMS  
--XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:cms.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：13282  
-> [GC (Allocation Failure) 2021-01-20T20:40:57.697+0800: 0.257: [ParNew: 139690K->17471K(157248K), 0.0055021 secs] 139690K->45171K(506816K), 0.0062084 secs] [Times: user=0.08 sys=0.11, real=0.01 secs]  
-  [GC (CMS Initial Mark) [1 CMS-initial-mark: 213156K(349568K)] 231362K(506816K), 0.0002583 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
-  [CMS-concurrent-mark-start]  
-  [CMS-concurrent-mark: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]  
-  [CMS-concurrent-preclean-start]  
-  [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]  
-  [CMS-concurrent-abortable-preclean-start]  
-  [GC (Allocation Failure) 2021-01-20T20:40:57.836+0800: 0.396: [ParNew: 157245K->17471K(157248K), 0.0195496 secs] 370402K->273612K(506816K), 0.0195916 secs] [Times: user=0.20 sys=0.00, real=0.02 secs]  
-  [GC (Allocation Failure) 2021-01-20T20:40:57.869+0800: 0.430: [ParNew: 157247K->17469K(157248K), 0.0217683 secs] 413388K->319006K(506816K), 0.0218078 secs] [Times: user=0.28 sys=0.06, real=0.02 secs]  
-  [GC (Allocation Failure) 2021-01-20T20:40:57.904+0800: 0.465: [ParNew: 157245K->157245K(157248K), 0.0000387 secs]2021-01-20T20:40:57.904+0800: 0.465: [CMS2021-01-20T20:40:57.904+0800: 0.465: [CMS-concurrent-abortable-preclean: 0.002/0.079 secs] [Times: user=0.55 sys=0.06, real=0.08 secs] 
-   (concurrent mode failure): 301537K->250851K(349568K), 0.0321722 secs] 458782K->250851K(506816K), [Metaspace: 3293K->3293K(1056768K)], 0.0325231 secs] [Times: user=0.03 sys=0.00, real=0.03 secs]  
+##### CMS  
+    -XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:cms.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：13282  
+    [GC (Allocation Failure) 2021-01-20T20:40:57.697+0800: 0.257: [ParNew: 139690K->17471K(157248K), 0.0055021 secs] 139690K->45171K(506816K), 0.0062084 secs] [Times: user=0.08 sys=0.11, real=0.01 secs]  
+    [GC (CMS Initial Mark) [1 CMS-initial-mark: 213156K(349568K)] 231362K(506816K), 0.0002583 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] 
+    [CMS-concurrent-mark-start]  
+    [CMS-concurrent-mark: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]  
+    [CMS-concurrent-preclean-start]  
+    [CMS-concurrent-preclean: 0.000/0.000 secs] [Times: user=0.00 sys=0.00, real=0.00 secs]  
+    [CMS-concurrent-abortable-preclean-start]  
+    [GC (Allocation Failure) 2021-01-20T20:40:57.836+0800: 0.396: [ParNew: 157245K->17471K(157248K), 0.0195496 secs] 370402K->273612K(506816K), 0.0195916 secs] [Times: user=0.20 sys=0.00, real=0.02 secs]  
+    [GC (Allocation Failure) 2021-01-20T20:40:57.869+0800: 0.430: [ParNew: 157247K->17469K(157248K), 0.0217683 secs] 413388K->319006K(506816K), 0.0218078 secs] [Times: user=0.28 sys=0.06, real=0.02 secs]  
+    [GC (Allocation Failure) 2021-01-20T20:40:57.904+0800: 0.465: [ParNew: 157245K->157245K(157248K), 0.0000387 secs]2021-01-20T20:40:57.904+0800: 0.465: [CMS2021-01-20T20:40:57.904+0800: 0.465: [CMS-concurrent-abortable-preclean: 0.002/0.079 secs] [Times: user=0.55 sys=0.06, real=0.08 secs] 
+    (concurrent mode failure): 301537K->250851K(349568K), 0.0321722 secs] 458782K->250851K(506816K), [Metaspace: 3293K->3293K(1056768K)], 0.0325231 secs] [Times: user=0.03 sys=0.00, real=0.03 secs]  
 > 持续几个young gc后，开始old的回收  
 
--XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：19603  
+    -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：19603  
 > 看到日志基本只有young gc，即老年代充足够用，撑得过应用的生命周期  
 > 同时4g情况下cms对比并行gc，可以看到吞吐量上，并行gc还是占优势
 
-* G1  
--XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:g1.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：12737  
--XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：24130  
--XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
-输出：26658  
+##### G1  
+    -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:g1.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：12737  
+    -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：24130  
+    -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps  
+    输出：26658  
 > g1更偏好大容量的堆。在堆较大的情况下，对比cms是一种全面的提升；堆空间不足，使用g1，很可能是反向的优化  
 
 #### lesson_3_2  
-sb -c 32 -N 120 -u "http://localhost:8088/api/hello"  
-相同压测条件下，使用不同的gc方式、不同的堆，demo的性能基本类似。猜测当前  
+    sb -c 32 -N 120 -u "http://localhost:8088/api/hello"  
+    
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:gs-serial512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar   
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms4g -Xmx4g -Xloggc:gs-serial4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms8g -Xmx8g -Xloggc:gs-serial8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:gs-parallel512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms4g -Xmx4g -Xloggc:gs-parallel4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms8g -Xmx8g -Xloggc:gs-parallel8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar    
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:gs-cms512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gs-cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms8g -Xmx8g -Xloggc:gs-cms8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:gs-g1512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:gs-g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+    java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:gs-g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+相同压测条件下，使用不同的gc方式、不同的堆，demo的性能基本类似。测试参数暂不完善  
 
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:gs-serial512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar   
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms4g -Xmx4g -Xloggc:gs-serial4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseSerialGC -Xms8g -Xmx8g -Xloggc:gs-serial8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:gs-parallel512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms4g -Xmx4g -Xloggc:gs-parallel4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseParallelGC -Xms8g -Xmx8g -Xloggc:gs-parallel8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar    
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:gs-cms512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gs-cms4g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseConcMarkSweepGC -Xms8g -Xmx8g -Xloggc:gs-cms8g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:gs-g1512m.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:gs-g14g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
-* java -XX:-UseAdaptiveSizePolicy -XX:+UseG1GC -Xms8g -Xmx8g -Xloggc:gs-g18g.gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -jar gateway-server-0.0.1-SNAPSHOT.jar  
+| gc类型 | jvm参数 | 吞吐与耗时 |
+| :---: | :---  | :---  |
+| SerialGC  | -Xms512m -Xmx512m |  ![](pics/gs-serial512m.png)  |
+| SerialGC  | -Xms4g -Xmx4g  | ![](pics/gs-serial4g.png)  |
+| SerialGC  | -Xms8g -Xmx8g  | ![](pics/gs-serial8g.png)  |
+| ParallelGC  | -Xms512m -Xmx512m  | ![](pics/gs-parallel512m.png)  |
+| ParallelGC  | -Xms4g -Xmx4g  | ![](pics/gs-parallel4g.png)  |
+| ParallelGC  | -Xms8g -Xmx8g  | ![](pics/gs-parallel8g.png)  |
+| ConcMarkSweepGC  | -Xms512m -Xmx512m  | ![](pics/gs-cms512m.png)  |
+| ConcMarkSweepGC  | -Xms4g -Xmx4g  | ![](pics/gs-cms4g.png)  |
+| ConcMarkSweepGC  | -Xms8g -Xmx8g  | ![](pics/gs-cms8g.png)  |
+| G1GC  | -Xms512m -Xmx512m  | ![](pics/gs-g1512m.png)  |
+| G1GC  | -Xms4g -Xmx4g  | ![](pics/gs-g14g.png)  |
+| G1GC  | -Xms8g -Xmx8g  | ![](pics/gs-g18g.png)  | 
 #### lesson_4_1  
 nio模式的http服务端，性能更优，相同压测条件下，gc耗时更短、速度更快  
 #### lesson_4_2   
@@ -114,6 +127,8 @@ nio模式的http服务端，性能更优，相同压测条件下，gc耗时更�
 >> 拷贝：将存活对象转移到一个不同的、可以认为是空的内存空间中，拷贝完成后，原地址就可以被当做可用的空间，代价是拷贝行为的花销与额外堆空间的花销  
 #### 各类垃圾回收器  
 ##### 代的设计  
+  
+年轻代
 <center>  
 
 ![Yg](pics/1YoungG.png)
@@ -137,8 +152,6 @@ nio模式的http服务端，性能更优，相同压测条件下，gc耗时更�
   * 老年代：强调gc和业务应用同时进行，但是也会有短暂的stw的阶段。**回收是原地释放的，即non-compacting。造成可用老年代空间的不连续，碎片化。更偏好大的堆空间**  
 * G1:适用于服务端，偏向于多核、大内存的机器，旨在实现短暂停，同时高吞吐的目标。gc过程与业务应用同时进行。堆被划分为等大小的区域  
   * 在G1中的老年代年轻代还是存在的，但是已经是逻辑上的概念了。即代的各区之间的内存不连续了。  
-  * 
-    * 
 
 G1垃圾回收器相关的虚拟机参数：  
 

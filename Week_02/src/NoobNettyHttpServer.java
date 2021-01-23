@@ -10,7 +10,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 public class NoobNettyHttpServer {
-    private static final String PORT = System.getProperty("server.port", "8881");
+    private static final String PORT = System.getProperty("server.port", "8801");
 
     public static void main(String[] args) {
         EventLoopGroup bossGroup = new NioEventLoopGroup(2);

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:noob="http://www.noob.com/schema/noob"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.noob.com/schema/noob
+        http://www.noob.com/schema/noob/noob.xsd">
+    <!--    <context:annotation-config/>-->
+    <context:component-scan base-package="noob.*"/>
+    <bean id="bean1" class="noob.beans.Bean1"/>
+    <bean id="bean2" class="noob.beans.Bean2"/>
+
+    <bean id="needBean1" class="noob.beans.NeedBean1"/>
+    <bean id="needBean2" class="noob.beans.NeedBean2" depends-on="annoBean2">
+        <property name="bean2" ref="bean2"/>
+    </bean>
+    <noob:student name="asdf" id="1123" beanName="hahaha"/>
+    <noob:klass >
+        <noob:student name="aaaa" id="111" beanName="vslvn"/>
+        <noob:student name="bbbb" id="112" beanName="vslvn"/>
+    </noob:klass>
+</beans>
